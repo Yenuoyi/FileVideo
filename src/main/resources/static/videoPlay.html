@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>video view</title>
+    <script src="jquery-3.3.1.min.js"></script>
+</head>
+<body onload="load()">
+<script type="text/javascript">
+    function getParams(key) {
+        var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) {
+            return unescape(r[2]);
+        }
+        return null;
+    };
+    function load(){
+        var txt = "<object classid=\"clsid:D27CDB6E-AE6D-11cf-96B8-444553540000\" codebase=\"http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,29,0\" width=\"500\" height=\"400\">\n" +
+            "    <param name=\"movie\" value=\"http://yourname.com/flvplayer.swf\" />\n" +
+            "    <param name=\"quality\" value=\"high\" />\n" +
+            "    <param name=\"allowFullScreen\" value=\"true\" />\n" +
+            "    <embed src=\"flvplayer.swf\" allowfullscreen=\"true\" flashvars=\"vcastr_file=videoDownload/"+getParams("param")+"&IsAutoPlay=1\" quality=\"high\" type=\"application/x-shockwave-flash\" width=\"960\" height=\"540\"></embed>\n" +
+            "</object>"
+        $("#object").append(txt)
+    }
+    console.log("参数param1:"+getParams("param"));//输出aa
+</script>
+<div id="object"></div>
+</body>
+</html>

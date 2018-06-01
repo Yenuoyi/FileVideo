@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>video menu</title>
+    <script src="jquery-3.3.1.min.js"></script>
+</head>
+<script>
+    function getPath() {
+        $.ajax({
+            url:"http://localhost:8080/VideoPath",
+            type:"get",
+            success:function(path) {
+                $("#view").append("<table>");
+                var JsonPath = JSON.parse(path);
+                for(i=0;i<JsonPath.length;i++){
+                    $("#view").append("<tr><td><a target='_blank' href='videoPlay.html?param="+JsonPath[i]+"'>"+JsonPath[i]+"</a></td></tr>");
+                }
+                $("#view").append("</table>");
+            }
+        })
+    }
+</script>
+<body onload="getPath()">
+<div id="view"></div>
+</body>
+</html>
